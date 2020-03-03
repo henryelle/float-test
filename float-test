@@ -1,0 +1,57 @@
+#include <stdio.h>
+
+void GetPromptString(char *output);
+void PromptAndGetFloat(char *prompt, float *output, float lowerlimit, float upperlimit);
+void GetQuotient(float dividend, float divisor, float *quotient);
+
+int main(void)
+{
+    char prompt1[31];
+    char prompt2[31];
+    float float1 = 0, float2 = 0;
+    float quotient = 0; //initializing all variables functions need
+
+    printf("********************\n");
+    printf("* Wacky Calculator *\n");
+    printf("********************\n\n");
+
+    
+    printf("Enter the prompt for the first variable: ");
+    GetPromptString(prompt1);
+    printf("Enter the prompt for the second variable: ");
+    GetPromptString(prompt2);
+
+    PromptAndGetFloat(prompt1, &float1, -123.199997, 71.400002);
+    PromptAndGetFloat(prompt2, &float2, -5.500000, 6.100000); //calling the two functions using their respective limits
+    GetQuotient(float1, float2, &quotient);
+
+    printf("The quotient of %f and %f is %f\n\n", float1, float2, quotient);
+
+}
+
+void GetPromptString(char *output)
+{
+    scanf("%s", output);
+    puts("\n");
+}
+
+void PromptAndGetFloat(char *prompt, float *output, float lowerlimit, float upperlimit)
+{
+    printf("%s (range %f to %f):", prompt, lowerlimit, upperlimit);
+    scanf("%f", output);
+
+    while(*(output) >= upperlimit || *(output) <= lowerlimit){ 
+        printf("***ERROR: You must enter a value in the range %f to %f", lowerlimit, upperlimit);
+        printf("\n%s (range %f to %f):", prompt, lowerlimit, upperlimit);
+        scanf("%f", output);
+        }
+    
+    puts("\n");//for formatting prettiness :D
+
+}
+
+void GetQuotient(float dividend, float divisor, float *quotient)
+{
+    *(quotient) = dividend / divisor; 
+}
+
